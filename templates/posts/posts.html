@@ -50,6 +50,12 @@
                             <a href="{% url 'post' post.id %}" class="btn btn-primary">
                                 Читать полностью
                             </a>
+                            <a href="{% url 'edit_post' post.id %}" class="btn btn-primary">
+                                Редактировать
+                            </a> 
+                            <a href="{% url 'delete_post' post.id %}" class="btn btn-primary">
+                                Удалить!
+                            </a>
                         </div>
                     </div>
                     
