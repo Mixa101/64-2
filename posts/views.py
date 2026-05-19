@@ -12,7 +12,7 @@ from django.views.generic import CreateView, DetailView, ListView
 
 from posts.form import PostForm
 from posts.models import Category, Post
-from posts.posts import get_categories, get_posts_filter_by_rate
+from posts.posts import create_comment, get_categories, get_posts_filter_by_rate
 
 # CBV - Class Based Views
 
@@ -46,6 +46,24 @@ class PostDetailView(DetailView):
     template_name = "posts/post.html"
     model = Post
     context_object_name = "post"
+
+    def get_object(self, queryset: QuerySet[Any] | None = None):
+        obj = super().get_object(queryset)
+        obj.view_count += 1
+        obj.save()
+        return obj
+
+
+def create_comment_view(request: HttpRequest, post_id):
+
+    if request.method == "POST":
+        user_id = None
+        if request.user:
+            user_id = request.user.id
+        comment = create_comment(post_id, request.POST.get("text"), user_id)
+
+        return redirect("post", post_id)
+    return redirect("post", post_id)
 
 
 # def get_post(request, id):
