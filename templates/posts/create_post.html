@@ -11,9 +11,9 @@
 
             <div class="card shadow-sm">
                 <div class="card-body">
-                    {% if error %}
+                    {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
-                            {{ error }}
+                            {{ form.errors }}
                         </div>
                     {% endif %}
                     <h4 class="card-title mb-4">Создать пост</h4>
@@ -56,6 +56,20 @@
                             <label class="form-label">Изображение</label>
                             <input type="file" name="image" class="form-control" value="{{ image }}">
                         </div>
+                        <div class="mb-3">
+                        <label for="tags" class="form-label">Теги</label>
+                        <input 
+                            type="text"
+                            class="form-control"
+                            id="tags"
+                            name="tags"
+                            placeholder="Например: python, django, backend"
+                            value="{{ tags }}"
+                        >
+                        <div class="form-text">
+                            
+                        </div>
+                    </div>
                         {% if categories %}
                         <div class="mb-3">
                             <label for="category" class="form-label">Категория</label>
